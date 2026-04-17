@@ -1,0 +1,289 @@
+<style>
+    .navbar {
+        background-color: #141412;
+        border-bottom: 1px solid #2a2a26;
+        padding: 0.85rem 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .navbar-brand {
+        font-family: 'Georgia', serif;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #f0e8d8;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+    }
+
+    .navbar-brand span {
+        color: #c8b89a;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links a {
+        font-family: 'Arial', sans-serif;
+        font-size: 0.85rem;
+        color: #8a8278;
+        text-decoration: none;
+        padding: 0.4rem 0.75rem;
+        border-radius: 5px;
+        letter-spacing: 0.02em;
+        transition: color 0.2s, background-color 0.2s;
+        display: block;
+    }
+
+    .nav-links a:hover {
+        color: #e8e0d0;
+        background-color: #222220;
+    }
+
+    .nav-links a.active {
+        color: #e8e0d0;
+    }
+
+    .nav-btn {
+        font-family: 'Arial', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 0.4rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .nav-btn-outline {
+        color: #c8b89a;
+        border: 1px solid #3a3632;
+        background-color: transparent;
+    }
+
+    .nav-btn-outline:hover {
+        background-color: #222220;
+        color: #e0d0b8;
+        border-color: #6b6355;
+    }
+
+    .nav-btn-solid {
+        color: #1a1a18;
+        background-color: #c8b89a;
+        border: 1px solid #c8b89a;
+    }
+
+    .nav-btn-solid:hover {
+        background-color: #d4c4a8;
+        border-color: #d4c4a8;
+    }
+
+    .nav-divider {
+        width: 1px;
+        height: 16px;
+        background-color: #2e2e2a;
+        margin: 0 0.25rem;
+    }
+
+    .user-dropdown {
+        position: relative;
+    }
+
+    .user-trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: 1px solid #2e2e2a;
+        border-radius: 5px;
+        padding: 0.35rem 0.75rem;
+        cursor: pointer;
+        transition: border-color 0.2s, background-color 0.2s;
+        font-family: 'Arial', sans-serif;
+        font-size: 0.85rem;
+        color: #a89880;
+    }
+
+    .user-trigger:hover {
+        border-color: #6b6355;
+        background-color: #222220;
+        color: #e8e0d0;
+    }
+
+    .user-trigger-chevron {
+        font-size: 0.65rem;
+        opacity: 0.5;
+        transition: transform 0.2s;
+    }
+
+    .user-dropdown.open .user-trigger-chevron {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: calc(100% + 6px);
+        background-color: #1e1e1c;
+        border: 1px solid #2e2e2a;
+        border-radius: 7px;
+        min-width: 140px;
+        padding: 0.4rem;
+        z-index: 200;
+    }
+
+    .user-dropdown.open .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        font-family: 'Arial', sans-serif;
+        font-size: 0.85rem;
+        color: #8a8278;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #2a2a26;
+        color: #e8e0d0;
+    }
+
+    .logout-link {
+        color: #a86858 !important;
+    }
+
+    .logout-link:hover {
+        background-color: #2a1e1e !important;
+        color: #d4887a !important;
+    }
+
+    .navbar-toggler {
+        display: none;
+        background: none;
+        border: 1px solid #2e2e2a;
+        border-radius: 5px;
+        padding: 0.4rem 0.6rem;
+        cursor: pointer;
+        color: #8a8278;
+        font-size: 1rem;
+    }
+
+    .flash-wrapper {
+        max-width: 1100px;
+        margin: 1rem auto 0;
+        padding: 0 1.5rem;
+    }
+
+    .flash-error {
+        background-color: #2a1a1a;
+        border: 1px solid #4a2020;
+        border-radius: 7px;
+        color: #d4887a;
+        padding: 0.75rem 1.1rem;
+        font-family: 'Arial', sans-serif;
+        font-size: 0.88rem;
+    }
+
+    @media (max-width: 640px) {
+        .navbar-toggler {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+            padding: 1rem 0 0.5rem;
+            width: 100%;
+        }
+
+        .nav-links.open {
+            display: flex;
+        }
+
+        .navbar-inner {
+            flex-wrap: wrap;
+        }
+
+        .nav-divider {
+            display: none;
+        }
+    }
+</style>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a class="navbar-brand" href="/">No<span>Blog</span></a>
+
+        <button class="navbar-toggler" onclick="
+            this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')
+        ">&#9776;</button>
+
+        <ul class="nav-links">
+            <li><a class="nav-link active" href="/">Home</a></li>
+
+            <% if (locals.user) { %>
+
+            <li><a class="nav-link" href="/blog/add-new">Add Blog</a></li>
+            <li><div class="nav-divider"></div></li>
+            <li>
+                <div class="user-dropdown" id="userDropdown">
+                    <button class="user-trigger" onclick="document.getElementById('userDropdown').classList.toggle('open')">
+                        <%= locals.user.fullName %>
+                        <span class="user-trigger-chevron">&#9660;</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="logout-link" href="/user/logout">Log out</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <% } else { %>
+
+            <li><div class="nav-divider"></div></li>
+            <li><a class="nav-btn nav-btn-outline" href="/user/signin">Sign in</a></li>
+            <li><a class="nav-btn nav-btn-solid" href="/user/signup">Create account</a></li>
+
+            <% } %>
+        </ul>
+    </div>
+</nav>
+
+<% if (locals.error) { %>
+<div class="flash-wrapper">
+    <div class="flash-error">
+        &#9432; &nbsp;<%= locals.error %>
+    </div>
+</div>
+<% } %>
+
+<script>
+    document.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('userDropdown');
+        if (dropdown && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
+</script>

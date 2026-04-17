@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+    <title>Create account</title>
+    <style>
+        body {
+            background-color: #1a1a18;
+            color: #e8e0d0;
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+        }
+
+        .auth-wrapper {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .auth-card {
+            background-color: #202020;
+            border: 1px solid #2e2e2a;
+            border-radius: 12px;
+            padding: 2.5rem 2.25rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-heading {
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: #f0e8d8;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.01em;
+        }
+
+        .auth-subtext {
+            font-size: 0.83rem;
+            color: #6b6355;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 2rem;
+        }
+
+        .field {
+            margin-bottom: 1.25rem;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            font-family: 'Arial', sans-serif;
+            color: #8a8278;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .field input {
+            width: 100%;
+            background-color: #181816;
+            border: 1px solid #2e2e2a;
+            border-radius: 7px;
+            color: #e8e0d0;
+            font-size: 0.92rem;
+            padding: 0.65rem 0.9rem;
+            outline: none;
+            transition: border-color 0.2s, background-color 0.2s;
+            font-family: 'Georgia', serif;
+            box-sizing: border-box;
+        }
+
+        .field input:focus {
+            border-color: #6b6355;
+            background-color: #1e1e1c;
+        }
+
+        .field input::placeholder {
+            color: #3a3835;
+        }
+
+        .auth-hint {
+            font-size: 0.78rem;
+            color: #4a4845;
+            font-family: 'Arial', sans-serif;
+            margin-top: 0.4rem;
+        }
+
+        .auth-submit {
+            width: 100%;
+            background-color: #c8b89a;
+            color: #1a1a18;
+            border: none;
+            border-radius: 7px;
+            padding: 0.72rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            font-family: 'Arial', sans-serif;
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 0.5rem;
+        }
+
+        .auth-submit:hover {
+            background-color: #d4c4a8;
+        }
+
+        .auth-submit:active {
+            transform: scale(0.98);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.82rem;
+            font-family: 'Arial', sans-serif;
+            color: #4a4845;
+        }
+
+        .auth-footer a {
+            color: #c8b89a;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .auth-footer a:hover {
+            color: #e0d0b8;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #2a2a26;
+            margin: 1.75rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+
+            <h1 class="auth-heading">Create an account</h1>
+            <p class="auth-subtext">Join and start writing today</p>
+
+            <hr class="divider" />
+
+            <form action="/user/signup" method="POST">
+
+                <div class="field">
+                    <label for="fullName">Full name</label>
+                    <input
+                        type="text"
+                        name="fullName"
+                        id="fullName"
+                        placeholder="Jane Doe"
+                        autocomplete="name"
+                    />
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                    />
+                    <p class="auth-hint">We'll never share your email with anyone else.</p>
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="••••••••"
+                        autocomplete="new-password"
+                    />
+                </div>
+
+                <button class="auth-submit" type="submit">Create account</button>
+
+            </form>
+
+            <p class="auth-footer">
+                Already have an account? <a href="/user/signin">Sign in</a>
+            </p>
+
+        </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

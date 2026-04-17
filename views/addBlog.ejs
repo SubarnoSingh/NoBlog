@@ -1,0 +1,276 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>Add New Blog</title>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+        <div class="container mt-3">
+            <form action="/blog" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="coverImage" class="form-table">Cover Image</label>
+                    <input type="file" class="form-control" id="coverImage" name="coverImage" aria-describedby="coverImage" />
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-table">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" aria-describedby="title" />
+                </div>
+                <div class="mb-3">
+                    <label for="body">Body</label>
+                    <textarea name="body" class="form-control" id="body"></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+    <title>Add New Blog</title>
+    <style>
+        body {
+            background-color: #1a1a18;
+            color: #e8e0d0;
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+        }
+
+        .page-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        .page-heading {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #f0e8d8;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.4rem;
+        }
+
+        .page-subtext {
+            font-size: 0.9rem;
+            color: #8a8278;
+            margin-bottom: 2.5rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #2e2e2a;
+            margin-bottom: 2.5rem;
+        }
+
+        .field-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8a8278;
+            margin-bottom: 0.5rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .field-input {
+            width: 100%;
+            background-color: #222220;
+            border: 1px solid #333330;
+            border-radius: 6px;
+            color: #e8e0d0;
+            font-size: 1rem;
+            padding: 0.7rem 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        .field-input:focus {
+            border-color: #6b6355;
+            background-color: #252523;
+        }
+
+        .field-input::placeholder {
+            color: #4a4845;
+        }
+
+        .field-textarea {
+            min-height: 280px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: #222220;
+            border: 1px dashed #3a3a36;
+            border-radius: 6px;
+            padding: 1.1rem 1.2rem;
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .file-upload-label:hover {
+            border-color: #6b6355;
+            background-color: #252523;
+        }
+
+        .file-upload-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #2e2e2a;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .file-upload-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: #8a8278;
+        }
+
+        .file-upload-text {
+            font-size: 0.88rem;
+            color: #8a8278;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .file-upload-text span {
+            color: #c8b89a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .file-name-display {
+            font-size: 0.82rem;
+            color: #6b6355;
+            margin-top: 0.4rem;
+            font-family: 'Arial', sans-serif;
+            padding-left: 0.2rem;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .submit-btn {
+            background-color: #c8b89a;
+            color: #1a1a18;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 2.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            font-family: 'Arial', sans-serif;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .submit-btn:hover {
+            background-color: #d4c4a8;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="page-wrapper">
+        <h1 class="page-heading">Write a new post</h1>
+        <p class="page-subtext">Share your thoughts with the world</p>
+        <hr class="divider">
+
+        <form action="/blog" method="post" enctype="multipart/form-data">
+
+            <div class="field-group">
+                <label class="field-label" for="coverImage">Cover Image</label>
+                <div class="file-upload-wrapper">
+                    <label class="file-upload-label" for="coverImage">
+                        <div class="file-upload-icon">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 16.5V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18v-1.5M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+                            </svg>
+                        </div>
+                        <div class="file-upload-text">
+                            <span>Choose a file</span> or drag it here
+                        </div>
+                        <input type="file" id="coverImage" name="coverImage"
+                            onchange="document.getElementById('file-name').textContent = this.files[0]?.name || ''" />
+                    </label>
+                    <p class="file-name-display" id="file-name"></p>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label" for="title">Title</label>
+                <input
+                    type="text"
+                    class="field-input"
+                    id="title"
+                    name="title"
+                    placeholder="Give your post a title…"
+                />
+            </div>
+
+            <div class="field-group">
+                <label class="field-label" for="body">Body</label>
+                <textarea
+                    class="field-input field-textarea"
+                    name="body"
+                    id="body"
+                    placeholder="Write your post here…"
+                ></textarea>
+            </div>
+
+            <div>
+                <button type="submit" class="submit-btn">Publish Post</button>
+            </div>
+
+        </form>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>
